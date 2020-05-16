@@ -7,15 +7,15 @@
         
         
         
-        <link rel="shortcut icon" href="/img/favicon.ico">
-        <title>MyWiki</title>
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/css/base.css" rel="stylesheet">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Windows - MyWiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
-        <script src="/js/jquery-1.10.2.min.js" defer></script>
-        <script src="/js/bootstrap.min.js" defer></script>
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
@@ -25,7 +25,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="/.">MyWiki</a>
+                <a class="navbar-brand" href="..">MyWiki</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -36,13 +36,13 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="navitem">
-                                <a href="/." class="nav-link">Home</a>
+                                <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
-                                <a href="/about/" class="nav-link">About</a>
+                                <a href="../about/" class="nav-link">About</a>
                             </li>
-                            <li class="navitem">
-                                <a href="/Windows/" class="nav-link">Windows</a>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Windows</a>
                             </li>
                         </ul>
 
@@ -52,6 +52,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../about/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -59,15 +69,58 @@
 
         <div class="container">
             <div class="row">
-
-    <div class="row-fluid">
-      <div id="main-content" class="span12">
-        <h1 id="404-page-not-found" style="text-align: center">404</h1>
-        <p style="text-align: center"><strong>Page not found</strong></p>
-      </div>
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
     </div>
 
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#win10" class="nav-link">Win10使用</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#win10-system-settings" class="nav-link">win10 System settings</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#gvim" class="nav-link">gVim</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
 
+<h1 id="win10">Win10使用</h1>
+<h2 id="win10-system-settings">win10 System settings</h2>
+<h3 id="win10_1">Win10更改非活动窗口标题栏的颜色</h3>
+<ul>
+<li>1、 首先打开设置—个性化—颜色，打开“显示‘开始’菜单、任务栏抄、操作中心和标题栏的颜色”选项。</li>
+<li>2、 关闭“从我的背景自动选取一种主题色”，然后选择一种较浅的颜色。
+  之所以要这样做，是为了从注册表中读取到当前的颜色值，我们要实现的是让非活动窗口标题栏为较浅的颜色，让活动窗口标题栏为较深颜色。</li>
+<li>3、 现在按Win+R打开运行，输入<strong>regedit</strong>回车打开注册表编辑器；</li>
+<li>4、 导航至知以下位置：</li>
+</ul>
+<pre><code>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\DWM
+</code></pre>
+
+<ul>
+<li>5、在右侧新建一个名为<strong>AccentColorInactive</strong>的32位DWORD值；</li>
+<li>6、 双击系统中已经存在的<strong>AccentColor</strong>，这就是当前系统的主题颜色，复制其值，再双击新建的<strong>AccentColorInactive</strong>，将其值改为当前系统主题色。</li>
+<li>7、然后回到个性化设置中，将当前系统主题色选择为一个较深的颜色值即道可。</li>
+</ul>
+<h2 id="gvim">gVim</h2>
+<h3 id="gvim-windows-clipboard">gVim + Windows Clipboard</h3>
+<p>添加以下代码到_vimrc</p>
+<pre><code class="bash">source $VIMRUNTIME/mswin.vim
+behave mswin
+</code></pre></div>
             </div>
         </div>
 
@@ -76,11 +129,11 @@
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = "/",
+            var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="/js/base.js" defer></script>
-        <script src="/search/main.js" defer></script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
